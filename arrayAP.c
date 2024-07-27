@@ -1,27 +1,38 @@
-#include<stdio.h>
-int ap(int [],int);
+#include <stdio.h>
+#include <stdlib.h>
+
 int main()
 {
-    int a[100]={2,5,6,8};
-    int i;
-    int diff=a[1]-a[0];
-    printf("%d",diff);
-   if(ap(a,diff))
-   {
-    printf("ap");
-   }
-   else
-   printf("not");
-}
-
-int ap(int a[],int diff)
-{
-    int i,j,c=0;
-    for(i=1;i<4;i++)
-    {  
-        if((a[i]-a[i-1])!=diff)
-           return 0;
+    int n , k , c = 0,sum = 0,max=0,*a;
+    
+    printf("Enter number of elements of array: ");
+    scanf("%d",&n);
+    
+    printf("Enter the key for elements of array: ");
+    scanf("%d",&k);
+    
+    a = (int*)malloc(n*sizeof(int));
+    
+    for(int i = 0 ; i < n ; i ++){
+            scanf("%d",a+i);
     }
-    return 1;
+    
+    for(int i = 0 ; i < k ; i++)
+        max += a[i];
+    
+    sum = max;
+        
+    for(int i = k ; i < n ; i ++){
+        sum += a[i];
+        sum -= a[i-k];
 
+        if(sum>max)
+            max = sum;
+    }
+    
+    printf("Max sum is: %d",max);
+    
+    free(a);
+
+    return 0;
 }
