@@ -29,7 +29,7 @@ void arrange(int a[])
     }
     for(i=0;i<6;i++)
     {
-        printf("%d",a[i]);
+        printf("%d\t",a[i]);
     }
 }
 //make it for if a[0]<0 and whill follow the same rule but with different condition.
