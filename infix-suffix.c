@@ -5,7 +5,9 @@ void push(char[],char,int *);
 int pop(char[],int *);
 int pred(char);
 int main()
-{ char stack[max],infix[max],postfix[max],ch,x,i,c,top=0,pos=0,l;
+{ char stack[max],infix[max],postfix[max];
+char ch,x,c;
+int i=0,top=0,pos=0,l;
    printf("\n input the infix: -\t");
    fgets(infix,100,stdin);
    l=strlen(infix);
@@ -15,7 +17,6 @@ int main()
    {   char c=infix[i];
        if((c>='a'&&c<='z')||(c>='A'&&c<='Z'))
        {  postfix[pos]=c;
-       printf("%c",c);
            pos++;
            }
            else if(c=='(')
@@ -51,16 +52,12 @@ int main()
 
   void push(char stack [],char c,int *top)
   {
-      
-         stack[*top]=c;
-         (*top)++;
+       stack[++(*top)] = c;
+         
          }
          
   int pop(char stack[],int *top)
-  {  int x;
-      x=stack[*top];
-   (*top)--;
-      return x;
+  {   return stack[(*top)--];
       }
       
  int pred(char c)
