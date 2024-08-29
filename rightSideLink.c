@@ -6,7 +6,7 @@ typedef struct link{
  }link;
 int main()
 {  link *head=NULL,*newnode=NULL,*temp=NULL;
-int choice=1;
+int choice;
 while(1)
 {
    newnode=(link *)malloc(sizeof(link));
@@ -21,9 +21,9 @@ while(1)
                           //from this we will not loose first address from head and we can save the next node address with temp
    temp=newnode;         //at last we will save the address of the newnode in temp
    }
-   printf("\ndo you want to continue yes-0 no-1");
+   printf("\ndo you want to continue yes-1 no-0");
    scanf("%d",&choice);
-   if(choice==1)
+   if(choice==0)
    break;
    }
    while(head!=0)

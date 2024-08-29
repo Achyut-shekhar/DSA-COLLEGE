@@ -1,3 +1,4 @@
+//swap the element of the array
 #include<stdio.h>
 int main()
 {
