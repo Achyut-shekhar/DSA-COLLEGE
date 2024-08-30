@@ -34,7 +34,7 @@ link *makeLink(link *newnode, link *head, link *temp) {
 
 
 void display(link *head)
-{   printf("\nthe display of the linked lis is:-\n");
+{   printf("\nthe display of the linked list is:-\n");
     while(head!=NULL)
    {
     printf("\n%p is the address of %d value\n",head->next,head->val);          //first in first out
@@ -47,19 +47,26 @@ link * insertNextBegg(link *newnode,link *head)
         newnode = (link *)malloc(sizeof(link));
         printf("Enter the data: ");
         scanf("%d", &newnode->val);
-        // newnode->next=head->next;
-        // head->next=newnode;
-        newnode->next=head;
-        
+        newnode->next=head->next;
+        head->next=newnode;
         return head;
     
+}
+link *insertbeforeBegg(link *newnode,link *head)
+{
+        newnode = (link *)malloc(sizeof(link));
+        printf("Enter the data: ");
+        scanf("%d", &newnode->val);
+        newnode->next=head;  //head address is stored in newnode
+        head=newnode;        //the head value is updated with newnode as it is now first node
+        return head;
 }
 int main(){
     int choice;
     link *newnode=NULL,*head=NULL,*temp=NULL;
     
     do{
-        printf("\n\ninput the choice\n 1-make a linked list\n2-display\n3-insert node at the end\n3-insert node beggning\n4-exit");
+        printf("\n\ninput the choice\n 1-make a linked list\n2-display\n3-insert node next the beggining \n4-insert node before the beggning\n5-exit");
     scanf("%d",&choice);
         switch(choice)
         {
@@ -72,7 +79,10 @@ int main(){
               case 3:
               insertNextBegg(newnode,head);
               break;
+              case 4:
+              head=insertbeforeBegg(newnode,head); //head will be updated
+              break;
              
         }
-    }while(choice<=3);
+    }while(choice<=5);
 }
