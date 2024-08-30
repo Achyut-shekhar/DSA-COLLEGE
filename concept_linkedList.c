@@ -47,8 +47,10 @@ link * insertNextBegg(link *newnode,link *head)
         newnode = (link *)malloc(sizeof(link));
         printf("Enter the data: ");
         scanf("%d", &newnode->val);
-        newnode->next=head->next;
-        head->next=newnode;
+        // newnode->next=head->next;
+        // head->next=newnode;
+        newnode->next=head;
+        
         return head;
     
 }
