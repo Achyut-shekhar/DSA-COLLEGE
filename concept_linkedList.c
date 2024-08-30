@@ -41,7 +41,17 @@ void display(link *head)
      head=head->next;                                 
      }
 }
-
+link * insertNextBegg(link *newnode,link *head)
+{
+    
+        newnode = (link *)malloc(sizeof(link));
+        printf("Enter the data: ");
+        scanf("%d", &newnode->val);
+        newnode->next=head->next;
+        head->next=newnode;
+        return head;
+    
+}
 int main(){
     int choice;
     link *newnode=NULL,*head=NULL,*temp=NULL;
@@ -57,9 +67,9 @@ int main(){
               case 2:
               display(head);
                break;
-            //   case 3:
-            //   insertAtBegg(newnode,head);
-            //   break;
+              case 3:
+              insertNextBegg(newnode,head);
+              break;
              
         }
     }while(choice<=3);
