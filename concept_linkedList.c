@@ -83,17 +83,15 @@ link *insertBeforeEnd(link *newnode,link *head)
         link *temp = head;
         link *temp1; 
         while (temp->next != NULL) {
+         //it will be before assigning the next because if we not then at last when it will find null temp1 and temp will have same address in them
+            temp1=temp;       
             temp = temp->next;
-            temp1=temp;
         } 
         temp1->next = newnode;
         newnode->next=temp;
     
     return head;
-     }
-
-    
-        
+}  
 int main(){
     int choice;
     link *newnode=NULL,*head=NULL,*temp=NULL;
@@ -121,7 +119,9 @@ int main(){
               case 6:
               head=insertBeforeEnd(newnode,head);
               break;
+              case 7:
+              deletenode(newnode,head);
              
         }
-    }while(choice<=6);
+    }while(choice<=10);
 }
