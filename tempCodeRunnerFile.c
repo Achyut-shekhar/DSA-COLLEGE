@@ -1,3 +1,4 @@
-case 3:
-            //   insertAtBegg(newnode,head);
+case 7:
+            //   deletenode(newnode,head);
             //   break;
+             
