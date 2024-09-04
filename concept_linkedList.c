@@ -122,6 +122,54 @@ link *deletenode(link *newnode, link *head)
     }
     return head;
 }
+
+void insertBetweenNode(link *newnode,link *head)
+{    int nodelocation;
+     int pos;
+    newnode = (link *)malloc(sizeof(link));
+    printf("Enter the data: ");
+    scanf("%d", &newnode->val);
+    link *temp = head;
+    printf("before node-1\nafter node-0");
+    scanf("%d",&pos);
+    if(pos){
+    printf("input the value of node before you want to add node");
+    scanf("%d",&nodelocation);
+    while (temp->next->val != nodelocation)
+    {
+        temp=temp->next;
+    }
+    newnode->next = temp->next;
+    temp->next = newnode;
+    }
+    else
+    { printf("input the value of node after you want to add node");
+    scanf("%d",&nodelocation);
+    while (temp->val != nodelocation)
+    {
+        temp=temp->next;
+    }
+    newnode->next = temp->next;
+    temp->next = newnode;
+    }
+}
+link *reverselink(link *newnode,link *head)
+{  link *curr=head,*prev=NULL,*after;
+while (curr != NULL) {
+
+        // Store next
+        after = curr->next;
+
+        // Reverse current node's next pointer
+        curr->next = prev;
+
+        // Move pointers one position ahead
+        prev = curr;
+        curr = after;
+    }
+   return prev;
+    
+   }
 int main()
 {
     int choice;
@@ -129,7 +177,7 @@ int main()
 
     do
     {
-        printf("\n\ninput the choice\n 1-make a linked list\n2-display\n3-insert node next the beggining \n4-insert node before the beggning\n5-insert after thee end node\n6-insert before the end node\n7-delete the node");
+        printf("\n\ninput the choice\n1-make a linked list\n2-display\n3-insert node next the beggining \n4-insert node before the beggning\n5-insert after thee end node\n6-insert before the end node\n7-delete the node\n8-insert node in between linked list\n9-reverse the linked list");
         scanf("%d", &choice);
         switch (choice)
         {
@@ -153,6 +201,12 @@ int main()
             break;
         case 7:
             head=deletenode(newnode, head);
+            break;
+        case 8:
+            insertBetweenNode(newnode,head);
+            break;
+         case 9:
+            head=reverselink(newnode,head);
             break;
         }
     } while (choice <= 10);
