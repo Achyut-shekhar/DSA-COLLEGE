@@ -170,6 +170,32 @@ while (curr != NULL) {
    return prev;
     
    }
+void alternateDisplay(link *newnode,link* head)
+{ int ch=1;
+  printf("if you want to print in odd alternate order\nyes-1\nno-0");
+  scanf("%d",&ch);
+  if(ch)
+  {  
+       printf("\nthe display of the linked list in odd order is:-\n");
+    while (head != NULL)
+    {
+    
+        printf("\n%p is the address of %d value\n", head->next, head->val); // first in first out
+        head = head->next->next;
+    }
+    }
+    else
+    {  head=head->next; 
+    printf("\nthe display of the linked list in even order is:-\n");
+    while (head != NULL)
+    {
+        
+        printf("\n%p is the address of %d value\n", head->next, head->val); // first in first out
+       head = head->next->next; 
+    }
+ }
+ }
+      
 int main()
 {
     int choice;
@@ -177,7 +203,7 @@ int main()
 
     do
     {
-        printf("\n\ninput the choice\n1-make a linked list\n2-display\n3-insert node next the beggining \n4-insert node before the beggning\n5-insert after thee end node\n6-insert before the end node\n7-delete the node\n8-insert node in between linked list\n9-reverse the linked list");
+        printf("\n\ninput the choice\n1-make a linked list\n2-display\n3-insert node next the beggining \n4-insert node before the beggning\n5-insert after thee end node\n6-insert before the end node\n7-delete the node\n8-insert node in between linked list\n9-reverse the linked list\n10-display in alternate order");
         scanf("%d", &choice);
         switch (choice)
         {
@@ -208,6 +234,9 @@ int main()
          case 9:
             head=reverselink(newnode,head);
             break;
+          case 10:alternateDisplay(newnode,head);
+            break;
+               
         }
     } while (choice <= 10);
 }
