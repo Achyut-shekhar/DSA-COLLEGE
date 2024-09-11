@@ -1,0 +1,77 @@
+#include<stdio.h>
+#include<stdlib.h>
+typedef struct doubl{
+    struct doubl  *prev;
+    int data;
+    struct doubl *next;
+    }doubl;
+doubl * insert(doubl*temp)
+{ doubl *newnode=NULL;
+  printf("input the data");
+  newnode=(doubl *)malloc(sizeof(doubl));
+  if(newnode!=NULL)
+  { printf("input the data");
+    scanf("%d",&newnode->data);
+    if(temp==NULL)
+    
+    {  temp=newnode;
+       newnode->prev=NULL;
+       }
+       else
+       { temp->next=newnode;
+         newnode->prev=temp;
+         temp=newnode;
+         }
+         temp->next=NULL;
+         }
+         return temp;
+         }
+doubl * delete(doubl*head)
+{ doubl *newnode=NULL;
+  if(head==NULL)
+    printf("error");
+  else
+  { newnode=head;
+    printf("%d",newnode->data);
+    head=head->next;
+    if(head!=NULL)
+     head->prev=NULL;
+   free(newnode);
+   return(newnode);
+   }
+   }
+void display(doubl *head)
+{ printf("\ndisplay is:-"); 
+while(head!=NULL)
+    { printf("\n%d\t%d\t%d",head->prev,head->next,head->data);
+      head=head->next;
+      }
+      }   
+
+
+main()
+{ doubl *head=NULL,*temp=NULL;
+  int ch;
+  do{
+   printf("\n1-insert\n2-delete\n3-display");
+   scanf("%d",&ch);
+   switch(ch)
+   {   case 1:
+        temp=insert(temp);
+        if(head==NULL)
+          head=temp;
+          break;
+        case 2:
+         head=delete(head);
+         if(head==NULL)
+         temp=NULL;
+         break;
+       case 3:
+        display(head);
+        break;
+        }
+        }while(ch<=4);
+}
+        
+         
+        
