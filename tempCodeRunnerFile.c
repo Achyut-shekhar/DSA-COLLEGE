@@ -1,4 +1,3 @@
-case 7:
-            //   deletenode(newnode,head);
-            //   break;
-             
+case 2:
+    //   head = deque(head);
+    //   break;
