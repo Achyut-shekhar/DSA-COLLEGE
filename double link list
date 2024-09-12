@@ -27,19 +27,23 @@ doubl * insert(doubl*temp)
          return temp;
          }
 doubl * delete(doubl*head)
-{ doubl *newnode=NULL;
+{ 
   if(head==NULL)
     printf("error");
   else
-  { newnode=head;
-    printf("%d",newnode->data);
-    head=head->next;
-    if(head!=NULL)
-     head->prev=NULL;
-   free(newnode);
-   return(newnode);
+  { doubl *temp = head;
+    printf("Deleted node data: %d\n", temp->data);
+
+    head = head->next;
+    if (head != NULL) {
+        head->prev = NULL;
+    }
+    
+    free(temp);
+    return head;
    }
    }
+   
 void display(doubl *head)
 { printf("\ndisplay is:-"); 
 while(head!=NULL)
@@ -48,12 +52,65 @@ while(head!=NULL)
       }
       }   
 
+doubl *insertBetween(doubl *head)
+{                          
+     doubl *t=head,*newnode=NULL;
+     int val;
+     int pos;
+    newnode=(doubl*)malloc(sizeof(doubl));
+     printf("\ninput after=1\nbedore=0\n");
+     scanf("%d",&pos);
+     printf("\ninput the value\n");
+     scanf("%d",&newnode->data);
+      printf("\ninput the data which you want to enter\n");
+     scanf("%d",&val);
+     if(pos)
+     {
+     while (t->data != val)
+    {
+        t=t->next;
+    }
+    if(t->next==NULL)
+    { newnode->prev=t;
+      newnode->next=NULL;
+      t->next=newnode;
+      }
+      else{
+    t->next->prev=newnode;
+    newnode->next = t->next;
+    newnode->prev=t; //putting address of t in newnode prev
+    t->next=newnode; //set the next of the t node 
+    }
+    }
+    else
+    {
+     if(head->data==val)
+     { 
+       head->prev=newnode;
+       newnode->next=head;
+       newnode->prev=NULL;
+       head=newnode;
+     } 
+     else
+     { 
+     while(t->next->data!=val)
+     { 
+       t=t->next;
+     }
+        newnode->next=t->next;
+        newnode->prev=t;
+        t->next=newnode;
+     }
+    }
+    return head;
+    }
+
 
 main()
 { doubl *head=NULL,*temp=NULL;
   int ch;
   do{
-   printf("\n1-insert\n2-delete\n3-display");
+   printf("\n1-insert\n2-delete\n3-display\n4-insert between before and after\n");
    scanf("%d",&ch);
    switch(ch)
    {   case 1:
@@ -68,6 +125,9 @@ main()
          break;
        case 3:
         display(head);
+        break;
+       case 4:
+        head=insertBetween(head);
         break;
         }
         }while(ch<=4);
