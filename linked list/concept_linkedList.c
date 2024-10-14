@@ -5,6 +5,23 @@ typedef struct link
     int val;
     struct link *next;
 } link;
+void dd_alternate(link *head)
+{
+    if (head == NULL || head->next == NULL || head->next->next == NULL)
+        return;
+
+    link *p = NULL;
+    link *temp = NULL;
+
+    while (head != NULL && head->next != NULL)
+    {
+        temp = head->next;
+        head->next = temp->next;
+        free(temp);
+        head = head->next;
+    }
+}
+
 link *makeLink(link *newnode, link *head, link *temp)
 {
     int ch;
@@ -118,44 +135,49 @@ link *deletenode(link *newnode, link *head)
     }
     else
     {
-        head = head->next;  
+        head = head->next;
     }
     return head;
 }
 
-void insertBetweenNode(link *newnode,link *head)
-{    int nodelocation;
-     int pos;
+void insertBetweenNode(link *newnode, link *head)
+{
+    int nodelocation;
+    int pos;
     newnode = (link *)malloc(sizeof(link));
     printf("Enter the data: ");
     scanf("%d", &newnode->val);
     link *temp = head;
     printf("before node-1\nafter node-0");
-    scanf("%d",&pos);
-    if(pos){
-    printf("input the value of node before you want to add node");
-    scanf("%d",&nodelocation);
-    while (temp->next->val != nodelocation)
+    scanf("%d", &pos);
+    if (pos)
     {
-        temp=temp->next;
-    }
-    newnode->next = temp->next;
-    temp->next = newnode;
+        printf("input the value of node before you want to add node");
+        scanf("%d", &nodelocation);
+        while (temp->next->val != nodelocation)
+        {
+            temp = temp->next;
+        }
+        newnode->next = temp->next;
+        temp->next = newnode;
     }
     else
-    { printf("input the value of node after you want to add node");
-    scanf("%d",&nodelocation);
-    while (temp->val != nodelocation)
     {
-        temp=temp->next;
-    }
-    newnode->next = temp->next;
-    temp->next = newnode;
+        printf("input the value of node after you want to add node");
+        scanf("%d", &nodelocation);
+        while (temp->val != nodelocation)
+        {
+            temp = temp->next;
+        }
+        newnode->next = temp->next;
+        temp->next = newnode;
     }
 }
-link *reverselink(link *newnode,link *head)
-{  link *curr=head,*prev=NULL,*after;
-while (curr != NULL) {
+link *reverselink(link *newnode, link *head)
+{
+    link *curr = head, *prev = NULL, *after;
+    while (curr != NULL)
+    {
 
         // Store next
         after = curr->next;
@@ -167,35 +189,36 @@ while (curr != NULL) {
         prev = curr;
         curr = after;
     }
-   return prev;
-    
-   }
-void alternateDisplay(link *newnode,link* head)
-{ int ch=1;
-  printf("if you want to print in odd alternate order\nyes-1\nno-0");
-  scanf("%d",&ch);
-  if(ch)
-  {  
-       printf("\nthe display of the linked list in odd order is:-\n");
-    while (head != NULL)
+    return prev;
+}
+void alternateDisplay(link *newnode, link *head)
+{
+    int ch = 1;
+    printf("if you want to print in odd alternate order\nyes-1\nno-0");
+    scanf("%d", &ch);
+    if (ch)
     {
-    
-        printf("\n%p is the address of %d value\n", head->next, head->val); // first in first out
-        head = head->next->next;
-    }
+        printf("\nthe display of the linked list in odd order is:-\n");
+        while (head != NULL)
+        {
+
+            printf("\n%p is the address of %d value\n", head->next, head->val); // first in first out
+            head = head->next->next;
+        }
     }
     else
-    {  head=head->next; 
-    printf("\nthe display of the linked list in even order is:-\n");
-    while (head != NULL)
     {
-        
-        printf("\n%p is the address of %d value\n", head->next, head->val); // first in first out
-       head = head->next->next; 
+        head = head->next;
+        printf("\nthe display of the linked list in even order is:-\n");
+        while (head != NULL)
+        {
+
+            printf("\n%p is the address of %d value\n", head->next, head->val); // first in first out
+            head = head->next->next;
+        }
     }
- }
- }
-      
+}
+
 int main()
 {
     int choice;
@@ -226,17 +249,20 @@ int main()
             insertBeforeEnd(newnode, head);
             break;
         case 7:
-            head=deletenode(newnode, head);
+            head = deletenode(newnode, head);
             break;
         case 8:
-            insertBetweenNode(newnode,head);
+            insertBetweenNode(newnode, head);
             break;
-         case 9:
-            head=reverselink(newnode,head);
+        case 9:
+            head = reverselink(newnode, head);
             break;
-          case 10:alternateDisplay(newnode,head);
+        case 10:
+            dd_alternate(head);
             break;
-               
+        case 11:
+            alternateDisplay(newnode, head);
+            break;
         }
-    } while (choice <= 10);
+    } while (choice <= 11);
 }

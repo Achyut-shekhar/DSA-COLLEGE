@@ -9,7 +9,7 @@ int main()
         int expected = a[i] + ap_diff;
         while (expected < a[i + 1])  
         {   
-            printf("%d-%d\n",a[i+1] ,expected);
+            printf("%d->%d\n",a[i+1] ,expected);
             expected += ap_diff;
         }
     }
