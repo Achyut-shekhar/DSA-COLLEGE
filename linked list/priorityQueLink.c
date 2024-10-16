@@ -47,44 +47,43 @@ void display(pq *head)
   }
 }
 
- pq *deque(pq *head)
+pq *deque(pq *head)
 {
-    if (head == NULL)
-    {
-        printf("Queue is empty\n");
-        return head;
-    }
-
-    pq *temp = head, *prev = NULL, *minNode = head, *minPrev = NULL;
-
-    // Find the node with the minimum priority
-    while (temp != NULL)
-    {
-        if (temp->priority < minNode->priority)
-        {
-            minNode = temp;
-            minPrev = prev;
-        }
-        prev = temp;
-        temp = temp->next;
-    }
-
-    // Remove the minNode from the list
-    if (minNode == head) // If minNode is the head
-    {
-        head = head->next;
-    }
-    else
-    {
-        minPrev->next = minNode->next;
-    }
-
-    printf("Dequeued: priority = %d, value = %d\n", minNode->priority, minNode->val);
-    free(minNode);
-
+  if (head == NULL)
+  {
+    printf("Queue is empty\n");
     return head;
-}
+  }
 
+  pq *temp = head, *prev = NULL, *minNode = head, *minPrev = NULL;
+
+  // Find the node with the minimum priority
+  while (temp != NULL)
+  {
+    if (temp->priority < minNode->priority)
+    {
+      minNode = temp;
+      minPrev = prev;
+    }
+    prev = temp;
+    temp = temp->next;
+  }
+
+  // Remove the minNode from the list
+  if (minNode == head) // If minNode is the head
+  {
+    head = head->next;
+  }
+  else
+  {
+    minPrev->next = minNode->next;
+  }
+
+  printf("Dequeued: priority = %d, value = %d\n", minNode->priority, minNode->val);
+  free(minNode);
+
+  return head;
+}
 
 int main()
 {
