@@ -1,34 +1,55 @@
-#include <stdio.h>
-#include <stdlib.h>
-typedef struct binary
-{
-  int data;
-  struct binary *left;
-  struct binary *right;
-} binary;
+//using double pointer
 
-//creating a binary tree
-binary *createbinary()
-{
-  binary *newnode;
-  newnode = (binary *)malloc(sizeof(binary));
-  printf("enetr the data:");
-  scanf("%d", &newnode->data);
-  if (newnode->data == -1)
-    return 0;
-  printf("\nenter the left child of %d:", newnode->data);
-  newnode->left = createbinary(); //when there will be -1 when this function is calling then it will terminate till this line and next line will be executed;
-  printf("\nenter the data of right child of %d:", newnode->data);
-  newnode->right = createbinary();
-  return newnode;
-}
-void levelOrderTraversal(){
+#include<stdio.h>
+#include<stdlib.h>
 
-}
-int main()
-{
-  binary *root;
-  root = createbinary();
+typedef struct node{
+int data;
+struct node*left,*right;
+}node;
 
-  
+node *create(int data)
+{ node *newnode=(node*)malloc(sizeof(node));
+newnode->data=data;
+newnode->left=NULL;
+newnode->right=NULL;
+return newnode;
 }
+
+void insert (node** root,int data)
+{  if(*root==NULL)
+ { *root=create(data);
+ return;
+ }
+ if(data<(*root)->data)
+ { 
+    insert (&((*root)->left),data);
+ }
+ else if(data>(*root)->data)
+   {  insert(&((*root)->right),data);
+   }
+   }
+   
+   void inorder(node *root)
+     { 
+     if(root!=NULL){
+        inorder(root->left);
+        printf("%d  ",root->data);
+        inorder(root->right);
+        }
+}
+        
+        
+  int main()
+  {  struct node *root=NULL;
+      insert(&root,50);
+      insert(&root,40);
+      insert(&root,20);
+      insert(&root,70);
+      insert(&root,80);
+
+ printf("\n\n------IN order-------\n");
+ inorder(root);
+ 
+ return 0;
+ }
