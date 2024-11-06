@@ -14,7 +14,7 @@ int main()
     newnode = (link *)malloc(sizeof(link));
     printf("enter the data\n");
     scanf("%d", &newnode->val);
-    newnode->next=NULL;  //added this to it has null in next so it terminates as it doesnt get null on its own in next.
+    newnode->next = NULL; // added this to it has null in next so it terminates as it doesnt get null on its own in next.
     if (head == NULL)
     {
       head = temp = newnode; // at first node head is NULL and therefore we are saving the first node address
@@ -24,7 +24,7 @@ int main()
     {
       temp->next = newnode; // after saving the first address in the head we need to save the next node address in  thefirst node and we have the address of first node from temp
                             // from this we will not loose first address from head and we can save the next node address with temp
-      temp = newnode; // at last we will save the address of the newnode in temp
+      temp = newnode;       // at last we will save the address of the newnode in temp
     }
     printf("\ndo you want to continue yes-1 no-0");
     scanf("%d", &choice);
