@@ -86,7 +86,7 @@ void calculate(cl *ptr, int t)
                 if (p == ptr)
                 {
                     break;
-                }   
+                }
             }
             else
             {
