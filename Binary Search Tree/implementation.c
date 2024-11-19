@@ -87,10 +87,19 @@ void delete(node **root, int val)
     delete (&((*root)->right), succ->data);
   }
 }
+
+int countRightNode(node *root)
+{
+
+  if (root == NULL)
+    return 0;
+
+  return 1 + countRightNode(root->left) + countRightNode(root->right);
+}
 int main()
 {
   struct node *root = NULL;
-  int ch, data, delValue;
+  int ch, data, delValue, count = 0;
   do
   {
     printf("\n input the choice");
@@ -109,6 +118,11 @@ int main()
       printf("\ninput the data");
       scanf("%d", &delValue);
       delete (&root, delValue);
+      break;
+    case 4:
+      count = countRightNode(root->right);
+      printf("\n total number of rught hand side of root node");
+      printf("\n%d", count);
       break;
     }
 
