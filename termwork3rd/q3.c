@@ -67,7 +67,7 @@ int main()
   int ch;
   do
   {
-    printf("\n\ninput the choices:\n1-create a link\n2-display a link\n3-find teh second minimum");
+    printf("\n\ninput the choices:\n1-create a link\n2-display a link\n3-find the second minimum");
     scanf("%d", &ch);
     switch (ch)
     {

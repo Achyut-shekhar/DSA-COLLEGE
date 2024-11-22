@@ -45,10 +45,28 @@ void display(node *head)
 
 void multiply(node *head)
 {
+  node *temp = head->next;
   int target;
+  int flag = 1;
   printf("\ninput the target value");
-  scanf("%d",&target);
-  
+  scanf("%d", &target);
+  while (head != NULL)
+  {
+    while (temp != NULL)
+    {
+      if (head->data * (temp->data) == target)
+      {
+        flag = 1;
+        break;
+      }
+      temp = temp->next;
+    }
+    head = head->next;
+  }
+  if (flag == 1)
+    printf("\tyes");
+  else
+    printf("\nno");
 }
 
 int main()
@@ -57,7 +75,7 @@ int main()
   int ch;
   do
   {
-    printf("\ninput the choice:\n1-create a link\n2-display\n3-revrese the linked list\n");
+    printf("\ninput the choice:\n1-create a link\n2-display\n3-find the target value\n");
     scanf("%d", &ch);
     switch (ch)
     {
