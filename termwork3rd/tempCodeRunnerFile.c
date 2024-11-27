@@ -59,15 +59,6 @@ void second_min(node *head)
     head = head->next;
   }
   printf("\nThe Second minimum is %d", SecondMin);
-  node *temp = head;
-  while (temp->next->data != SecondMin)
-  {
-    temp = temp->next;
-  }
-  node *del = temp->next;
-  temp->next = temp->next->next;
-  free(del);
-  display(head);
 }
 
 int main()
