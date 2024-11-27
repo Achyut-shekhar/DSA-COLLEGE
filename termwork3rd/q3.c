@@ -45,6 +45,7 @@ void second_min(node *head)
 {
   int min = head->data;
   int SecondMin = min;
+  node *temp = head;
   while (head != NULL)
   {
     if (head->data < min)
@@ -59,7 +60,6 @@ void second_min(node *head)
     head = head->next;
   }
   printf("\nThe Second minimum is %d", SecondMin);
-  node *temp = head;
   while (temp->next->data != SecondMin)
   {
     temp = temp->next;
