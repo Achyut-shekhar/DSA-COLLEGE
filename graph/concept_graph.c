@@ -53,6 +53,32 @@ void printlist()
     printf("\n");
   }
 }
+
+void dfsutil(int vertex, int visited[])
+{
+  visited[vertex] = 1;
+  printf("%d ", vertex);
+
+  node *temp = adjilist[vertex]->head->next;
+
+  while (temp != NULL)
+  {
+    if (!visited[temp->vertexNum])
+    {
+      dfsutil(temp->vertexNum, visited);
+    }
+    temp = temp->next;
+  }
+}
+
+void dfs(int startVertex)
+{
+  int visited[maxNode] = {0}; // initialize visited vertex
+  printf("DFS starting from vertex %d:\n", startVertex);
+  dfsutil(startVertex, visited);
+  printf("\n");
+}
+
 int main()
 {
   int i, edges, s, d;
@@ -74,5 +100,10 @@ int main()
   }
 
   printlist();
+
+  int startVertex;
+  printf("enter the starting vertex for DFS");
+  scanf("%d", &startVertex);
+  dfs(startVertex);
   return 0;
 }

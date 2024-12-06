@@ -26,7 +26,7 @@ void printReverse(link *head)
   {
     return;
   }
-//using recursion
+  //using recursion
   printReverse(head->next);
   printf("\n%d", head->data);
 }
