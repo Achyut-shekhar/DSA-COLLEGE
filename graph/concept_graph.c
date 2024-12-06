@@ -79,6 +79,38 @@ void dfs(int startVertex)
   printf("\n");
 }
 
+void bfs(int startVertex)
+{
+  int visited[maxNode] = {0};
+  int queue[maxNode];
+  int front = 0, rear = 0;
+
+  // marking the visited vertex
+  visited[startVertex] = 1;
+  queue[rear++] = startVertex;
+
+  printf("bfs starting from vertex %d:\n", startVertex);
+
+  while (front < rear)
+  {
+    // dequeu a vertex
+    int currentVertex = queue[front++];
+    printf("%d", currentVertex);
+
+    // raversal all adjacent vertex
+    node *temp = adjilist[currentVertex]->head->next;
+    while (temp)
+    {
+      if (!visited[temp->vertexNum])
+      {
+        visited[temp->vertexNum] = 1;
+        queue[rear++] = temp->vertexNum;
+      }
+      temp = temp->next;
+    }
+  }
+  printf("\n");
+}
 int main()
 {
   int i, edges, s, d;
@@ -105,5 +137,13 @@ int main()
   printf("enter the starting vertex for DFS");
   scanf("%d", &startVertex);
   dfs(startVertex);
+
+  while (getchar() != '\n')
+    ; // Clear residual input
+
+  int startvertexbfs;
+  printf("enter the starting vertex for BFS: ");
+  scanf("%d", &startvertexbfs);
+  bfs(startvertexbfs);
   return 0;
 }
