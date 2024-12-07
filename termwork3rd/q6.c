@@ -65,7 +65,7 @@ int secondhighest(node *root)
 
   if (current && current->left != NULL)
   {
-    return minValueNode((current->left)->data);
+    return minValueNode((current->left));
   }
   if (parent)
     return parent->data;

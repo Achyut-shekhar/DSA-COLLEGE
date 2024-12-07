@@ -44,7 +44,7 @@ void inOrder(node *root)
 }
 node *getSuccessor(node *root)
 {
-  root = root->right;
+
   while (root != NULL && root->left != NULL)
   {
     root = root->left;
@@ -86,11 +86,73 @@ node *delete(node *root, int data)
     }
 
     // Case 3: Node with two children
-    node *succ = getSuccessor(root);                // Get the inorder successor
+    node *succ = getSuccessor(root->right);         // Get the inorder successor
     root->data = succ->data;                        // Replace root data with successor's data
     root->right = delete (root->right, succ->data); // Delete the successor node
   }
   return root;
+}
+
+void countRightNode(node *root, int *count)
+{
+  if (root == NULL)
+  {
+    return;
+  }
+
+  (*count)++; // Increment count for the current node
+  countRightNode(root->left, count);
+  countRightNode(root->right, count);
+}
+
+int secondHighest(node *root)
+{
+  node *parent = NULL;
+  node *current = root;
+  while (current->right != NULL)
+  {
+    parent = current;
+    current = current->right;
+  }
+  if (current && current->left != NULL)
+    return getSuccessor(root->left);
+
+  if (parent)
+    return parent->data;
+}
+
+int Hight(node *root)
+{
+  if (root == NULL)
+  {
+    return -1;
+  }
+
+  return 1 + (Hight(root->left) > Hight(root->right) ? Hight(root->left) : Hight(root->right));
+}
+
+int countParent(node *root)
+{
+  if (root == NULL)
+    return 0;
+
+  int cnt = 0;
+  if (root->left != NULL && root->right != NULL)
+    cnt++;
+
+  return cnt + countParent(root->right) + countParent(root->left);
+}
+
+int countleafNode(node *root)
+{
+  if (root == NULL)
+    return 0;
+
+  int countleaf = 0;
+  if (root->left == NULL && root->right == NULL)
+    countleaf++;
+
+  return countleaf + countleafNode(root->right) + countleafNode(root->left);
 }
 
 int main()
@@ -113,5 +175,36 @@ int main()
   printf("\n------deleted bst--------\n");
   inOrder(root);
 
+  printf("\n--------count right side node---------\n");
+  int count;
+  countRightNode(root->right, &count);
+  printf("%d", count);
+
+  printf("\n--------count all node---------\n");
+  int allcount = 0;
+  countRightNode(root, &allcount);
+  printf("%d", allcount);
+
+  printf("\n--------seconf highest------\n");
+  int high = secondHighest(root);
+  printf("%d", high);
+
+  printf("\n--------height------\n");
+  int hightNum = Hight(root);
+  printf("%d", hightNum);
+
+  printf("\n--------parent node------\n");
+  int countNum = countParent(root);
+  printf("%d", countNum);
+
+  printf("\n--------left hand side node------\n");
+  int countleft = 0;
+  countRightNode(root->left, &countleft);
+  printf("%d", countleft);
+
+  printf("\n--------count leaf node------\n");
+
+  int countleaf = countleafNode(root);
+  printf("%d", countleaf);
   return 0;
 }
