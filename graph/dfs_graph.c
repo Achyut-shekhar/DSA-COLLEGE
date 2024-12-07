@@ -16,27 +16,26 @@ list *adjilist[maxNode] = {0};
 
 void add(int s, int d)
 {
-  node *dest, *tmp, *src;
-
-  if (adjilist[s]->head == NULL)
-  {
-    src = (node *)malloc(sizeof(node));
-    src->vertexNum = s;
-    src->next = NULL;
-    adjilist[s]->head = src;
-  }
+  node *dest, *tmp;
 
   dest = (node *)malloc(sizeof(node));
   dest->vertexNum = d;
   dest->next = NULL;
-  tmp = adjilist[s]->head;
-  while (tmp->next != NULL)
-  {
-    tmp = tmp->next;
-  }
-  tmp->next = dest;
-}
 
+  if (adjilist[s]->head == NULL)
+  {
+    adjilist[s]->head = dest; // Directly set the head to the first destination node
+  }
+  else
+  {
+    tmp = adjilist[s]->head;
+    while (tmp->next != NULL)
+    {
+      tmp = tmp->next;
+    }
+    tmp->next = dest; // Append the destination node at the end
+  }
+}
 void printlist()
 {
   int i;
@@ -59,7 +58,7 @@ void dfsutil(int vertex, int visited[])
   visited[vertex] = 1;
   printf("%d ", vertex);
 
-  node *temp = adjilist[vertex]->head->next;
+  node *temp = adjilist[vertex]->head; // Start from the head of the list
 
   while (temp != NULL)
   {
@@ -70,7 +69,6 @@ void dfsutil(int vertex, int visited[])
     temp = temp->next;
   }
 }
-
 void dfs(int startVertex)
 {
   int visited[maxNode] = {0}; // initialize visited vertex
@@ -79,38 +77,6 @@ void dfs(int startVertex)
   printf("\n");
 }
 
-void bfs(int startVertex)
-{
-  int visited[maxNode] = {0};
-  int queue[maxNode];
-  int front = 0, rear = 0;
-
-  // marking the visited vertex
-  visited[startVertex] = 1;
-  queue[rear++] = startVertex;
-
-  printf("bfs starting from vertex %d:\n", startVertex);
-
-  while (front < rear)
-  {
-    // dequeu a vertex
-    int currentVertex = queue[front++];
-    printf("%d", currentVertex);
-
-    // raversal all adjacent vertex
-    node *temp = adjilist[currentVertex]->head->next;
-    while (temp)
-    {
-      if (!visited[temp->vertexNum])
-      {
-        visited[temp->vertexNum] = 1;
-        queue[rear++] = temp->vertexNum;
-      }
-      temp = temp->next;
-    }
-  }
-  printf("\n");
-}
 int main()
 {
   int i, edges, s, d;
@@ -138,12 +104,5 @@ int main()
   scanf("%d", &startVertex);
   dfs(startVertex);
 
-  while (getchar() != '\n')
-    ; // Clear residual input
-
-  int startvertexbfs;
-  printf("enter the starting vertex for BFS: ");
-  scanf("%d", &startvertexbfs);
-  bfs(startvertexbfs);
   return 0;
 }
