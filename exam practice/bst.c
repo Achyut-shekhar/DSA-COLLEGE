@@ -90,7 +90,6 @@ node *delete(node *root, int data)
     root->data = succ->data;                        // Replace root data with successor's data
     root->right = delete (root->right, succ->data); // Delete the successor node
   }
-  return root;
 }
 
 void countRightNode(node *root, int *count)
@@ -99,9 +98,9 @@ void countRightNode(node *root, int *count)
   {
     return;
   }
-
-  (*count)++; // Increment count for the current node
   countRightNode(root->left, count);
+  (*count)++; // Increment count for the current node
+
   countRightNode(root->right, count);
 }
 
@@ -176,7 +175,7 @@ int main()
   inOrder(root);
 
   printf("\n--------count right side node---------\n");
-  int count;
+  int count = 0;
   countRightNode(root->right, &count);
   printf("%d", count);
 
